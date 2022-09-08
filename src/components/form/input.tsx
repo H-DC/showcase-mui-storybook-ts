@@ -2,15 +2,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import {
-    Checkbox,
-    FormControlLabel,
-    FormGroup,
-    FormHelperText,
-    InputLabel,
-    Select,
-    TextField,
-} from '@material-ui/core';
+import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
+import { FormHelperText, InputLabel, Select, TextField } from '@material-ui/core';
 
 export enum InputVariant {
     Radio = 'radio',
