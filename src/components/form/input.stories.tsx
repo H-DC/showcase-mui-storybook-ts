@@ -6,17 +6,24 @@ import { Input, InputVariant } from './input';
 export default {
   title: 'Input',
   component: Input,
+  argTypes: {
+    value: {
+      control: {
+        disable: true,
+      },
+      onChange: {
+        action: 'changed',
+      },
+    },
+  },
 } as ComponentMeta<typeof Input>;
 
-const RadioTemplate: ComponentStory<typeof Input> = (args) => <Input {...args} />;
-const SelectTemplate: ComponentStory<typeof Input> = (args) => <Input {...args} />;
-const TextTemplate: ComponentStory<typeof Input> = (args) => <Input {...args} />;
-const CheckboxTemplate: ComponentStory<typeof Input> = (args) => <Input {...args} />;
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
-export const Radio = RadioTemplate.bind({});
-export const Select = SelectTemplate.bind({});
-export const Text = TextTemplate.bind({});
-export const Checkbox = CheckboxTemplate.bind({});
+export const Radio = Template.bind({});
+export const Select = Template.bind({});
+export const Text = Template.bind({});
+export const Checkbox = Template.bind({});
 
 Radio.args = {
   variant: InputVariant.Radio,
@@ -27,8 +34,6 @@ Radio.args = {
   ],
   label: 'Field A',
   name: 'fieldA',
-  value: '',
-  onChange: () => {},
 };
 Select.args = {
   variant: InputVariant.Select,
@@ -40,15 +45,11 @@ Select.args = {
   ],
   label: 'Field B',
   name: 'fieldB',
-  value: '',
-  onChange: () => {},
 };
 Text.args = {
   variant: InputVariant.Text,
   label: 'Field C',
   name: 'fieldC',
-  value: '',
-  onChange: () => {},
 };
 Checkbox.args = {
   variant: InputVariant.Checkbox,
@@ -60,6 +61,4 @@ Checkbox.args = {
   label: 'Field G',
   errors: ['Field G is required'],
   name: 'fieldG',
-  value: '',
-  onChange: () => {},
 };

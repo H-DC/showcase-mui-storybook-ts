@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Card } from './card';
 import { InputVariant, Input } from '../form';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Card',
@@ -42,9 +43,9 @@ Default.args = {
     avatar: 'R',
   },
   headerActions: [
-    { label: 'External action', onClick: () => console.log('ext') },
-    { label: 'Other action', onClick: () => console.log('other') },
+    { label: 'External action', onClick: action('External action') },
+    { label: 'Other action', onClick: action('Other action') },
   ],
   primaryFooterAction: { label: 'Envoyer le formulaire' },
-  secondaryFooterActions: { label: 'Enregistrer', onClick: () => null },
+  secondaryFooterActions: { label: 'Enregistrer', onClick: action('Enregistrer') },
 };
