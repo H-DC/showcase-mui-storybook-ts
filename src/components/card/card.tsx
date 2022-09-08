@@ -64,7 +64,7 @@ export const Card: React.FC<CardProps> = ({
           </Typography>
         </Box>
         <Grid container direction="column" spacing={2}>
-          {children.map((child, index) => (
+          {children?.map((child, index) => (
             <Grid item xs key={index}>
               {child}
             </Grid>

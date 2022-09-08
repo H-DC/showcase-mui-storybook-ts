@@ -1,8 +1,24 @@
 import { Card, Input, FormRow, InputVariant } from './components';
 import { Formik } from 'formik';
+import * as yup from 'yup';
+import { useState } from 'react';
+
+const formSchema = yup.object().shape({
+  fieldA: yup.string().oneOf(['fieldA.1', 'fieldA.2', 'fieldA.3']),
+  fieldB: yup.string().oneOf(['fieldB.1', 'fieldB.2', 'fieldB.3']),
+  fieldC: yup.string(),
+  fieldD: yup.string(),
+  fieldE: yup.string(),
+  fieldF: yup.string().when('fieldA', { is: 'fieldA.2', then: yup.string().required() }),
+  fieldG: yup
+    .array()
+    .of(yup.string().oneOf(['fieldG.1', 'fieldG.2', 'fieldG.3']))
+    .min(1)
+    .required(),
+});
 
 const INITIAL_VALUES = {
-  fieldA: 'fieldA.2',
+  fieldA: 'fieldA.3',
   fieldB: 'fieldB.2',
   fieldC: 'initial value',
   fieldD: '',
@@ -12,10 +28,20 @@ const INITIAL_VALUES = {
 };
 
 function Target() {
+  const [errors, setErrors] = useState<string[]>([]);
+
   return (
     <Formik
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        formSchema
+          .validate(values)
+          .then(() => {
+            setErrors([]);
+            console.log('Send http request');
+          })
+          .catch((err) => {
+            setErrors(err.errors);
+          });
       }}
       initialValues={INITIAL_VALUES}
     >
@@ -97,6 +123,7 @@ function Target() {
             ]}
             label="Field G"
             name="fieldG"
+            errors={errors}
             onChange={handleChange}
             value={values.fieldG}
           />

@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test": "vitest"
   },
   "dependencies": {
     "@material-ui/core": "v4",
@@ -33,6 +34,7 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
     "babel-loader": "^8.2.5",
+    "jsdom": "^20.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vitest": "^0.23.1"

@@ -21,21 +21,22 @@ export enum InputVariant {
 
 interface InputProps {
   variant: InputVariant;
-  options: { value: string; label: string }[];
+  options?: { value: string; label: string }[];
   label: string;
   name: string;
-  value: string | string[];
-  onChange: (e: React.ChangeEvent<any>) => void;
+  value?: string | string[];
+  errors?: string[];
+  onChange?: (e: React.ChangeEvent<unknown>) => void;
 }
 
-export const Input: React.FC<InputProps> = ({ variant, options, label, name, value, onChange }) => {
+export const Input: React.FC<InputProps> = ({ variant, errors, options, label, name, value, onChange }) => {
   if (variant === InputVariant.Radio) {
     return (
       <FormControl component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
         <RadioGroup name={name} value={value}>
           <FormGroup row>
-            {options.map((option: any) => (
+            {options?.map((option) => (
               <FormControlLabel
                 key={option.value}
                 value={option.value}
@@ -64,7 +65,7 @@ export const Input: React.FC<InputProps> = ({ variant, options, label, name, val
           native
           fullWidth
         >
-          {options.map((option: any) => (
+          {options?.map((option) => (
             <option value={option.value} key={option.value}>
               {option.label}
             </option>
@@ -79,7 +80,7 @@ export const Input: React.FC<InputProps> = ({ variant, options, label, name, val
       <FormControl required component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
         <FormGroup row>
-          {options.map((option: any) => (
+          {options?.map((option) => (
             <FormControlLabel
               key={option.value}
               control={<Checkbox name={name} value={option.value} onChange={onChange} />}
@@ -87,7 +88,11 @@ export const Input: React.FC<InputProps> = ({ variant, options, label, name, val
             />
           ))}
         </FormGroup>
-        <FormHelperText>You can display an error</FormHelperText>
+        {errors?.map((error) => (
+          <FormHelperText error key={error} data-testid="error-tag">
+            {error}
+          </FormHelperText>
+        ))}
       </FormControl>
     );
   } else {
